@@ -71,8 +71,8 @@ reload the modules, which will reflect all your changes:
 Call functions that return Promises just like a normal function call.
 The promises are resolved before continuing:
 ```javascript
-> var lead = server.controllers.helpers.Lead.fetch('some-lead-id')
-> lead // Should print out the lead object
+> var user = db.getUser('some-id') // db.getUser() returns a Promise
+> user // Should print out the lead object
 ```
 
 ## UNCAUGHT EXCEPTIONS
