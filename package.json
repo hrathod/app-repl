@@ -1,0 +1,31 @@
+{
+  "name": "app-repl",
+  "version": "0.0.1",
+  "description": "A nicer Node REPL",
+  "main": "src/index.js",
+  "bin": {
+    "app-repl": "bin/app-repl"
+  },
+  "dependencies": {
+    "bluebird": "^2.9.25",
+    "glob": "^5.0.6",
+    "lodash": "^3.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hrathod/app-repl.git"
+  },
+  "keywords": [
+    "REPL"
+  ],
+  "author": "hrathod",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/hrathod/app-repl/issues"
+  },
+  "homepage": "https://github.com/hrathod/app-repl"
+}
