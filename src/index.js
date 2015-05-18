@@ -105,20 +105,22 @@ function source (fn) {
 }
 
 function isOwnModule (filename) {
-    var path = pathLib.resolve(__dirname, '/..');
+    var path = pathLib.resolve(__dirname, '../');
     return filename.indexOf(path) === 0;
 }
 
 function reload (ctx) {
     var modules = ld.keys(ctx.require.cache);
-    ld.forEach(modules, function (module) {
-        if (!isOwnModule(module)) {
-            delete ctx.require.cache[module];
+    var loaded = [];
+    ld.forEach(modules, function (m) {
+        if (!isOwnModule(m)) {
+            delete ctx.require.cache[m];
         }
     });
-    ld.forEach(modules, function (module) {
-        if (!isOwnModule(module)) {
-            ctx.require(module);
+    ld.forEach(modules, function (m) {
+        if (!isOwnModule(m)) {
+            loaded.push(m);
+            ctx.require(m);
         }
     });
     ld.forEach(ld.keys(ctx.__loadedPaths), function (path) {
