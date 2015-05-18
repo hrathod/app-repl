@@ -85,7 +85,7 @@ function load (ctx, pattern, elide) {
                         ld.drop(fullPath, skip);
                 loaded.push(path.join('.'));
                 setIn(ctx, path, ctx.require(name));
-                ctx.__loadedPaths[path] = elide;
+                ctx.__loadedPaths[pattern] = elide;
             }
         });
         return loaded;
@@ -119,13 +119,14 @@ function reload (ctx) {
     });
     ld.forEach(modules, function (m) {
         if (!isOwnModule(m)) {
-            loaded.push(m);
             ctx.require(m);
         }
     });
-    ld.forEach(ld.keys(ctx.__loadedPaths), function (path) {
-        ctx.load(path, ctx.__loadedPaths[path]);
+    ld.forEach(ctx.__loadedPaths, function (val, key) {
+        loaded.push(key);
+        ctx.load(key, val);
     });
+    return loaded;
 }
 
 /**
