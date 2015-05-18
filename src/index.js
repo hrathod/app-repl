@@ -104,15 +104,20 @@ function source (fn) {
     return console.log(ret);
 }
 
+function isOwnModule (filename) {
+    var path = pathLib.resolve(__dirname, '/..');
+    return filename.indexOf(path) === 0;
+}
+
 function reload (ctx) {
     var modules = ld.keys(ctx.require.cache);
     ld.forEach(modules, function (module) {
-        if (module !== __filename) {
+        if (!isOwnModule(module)) {
             delete ctx.require.cache[module];
         }
     });
     ld.forEach(modules, function (module) {
-        if (module !== __filename) {
+        if (!isOwnModule(module)) {
             ctx.require(module);
         }
     });
